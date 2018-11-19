@@ -1,0 +1,113 @@
+<mat-card>
+    <mat-card-title>
+        <h1 class="report-h1">Balance Sheet</h1>
+        <h2 class="report-h2">{{ gb.currentUser.name }}</h2>
+        <h2 class="report-h2">As at {{ reportingPeriod | date : 'd MMMM yyyy' }} </h2>
+
+        <div class="reporting-period-picker">
+            <h4 class="mat-h4">Reporting Date</h4>
+            <input type="date" [(ngModel)]="reportingPeriod" (ngModelChange)="reportingPeriodHandler()" required>
+        </div>
+    </mat-card-title>
+    <mat-card-content class="text-left">
+        <table *ngIf="assets.finalBalance>0">
+        <thead class="border-bottom-dark">
+            <th><h3>Assets</h3></th>
+            <th class="text-right th-reporting-period">{{ endDate | date : 'MMM yyyy' }}</th>
+        </thead>
+        <tbody *ngIf="assets.bank[0].finalBalance>0">
+            <tr>
+                <th colspan="2" class="indent-2em border-bottom-dark"><div class="margin-top-1em">Bank</div></th>
+            </tr>
+            <tr *ngFor="let acc of assets.bank | slice:1">
+                <td class="indent-4em" *ngIf="acc.finalBalance>0">{{ acc.name }}</td>
+                <td class="text-right" *ngIf="acc.finalBalance>0">{{ acc.finalBalance | currency : ' ' }}</td>
+            </tr>
+            <tr>
+                <th class="indent-4em"><div class="margin-bottom-1em">Total Bank</div></th>
+                <th class="text-right"><div class="margin-bottom-1em">{{ assets.bank[0].finalBalance | currency : ' ' }}</div></th>
+            </tr>
+        </tbody>
+        <tbody *ngIf="assets.currentAsset[0].finalBalance>0">
+            <tr>
+                <th colspan="2" class="indent-2em border-bottom-dark"><div class="margin-top-1em">Current Assets</div></th>
+            </tr>
+            <tr *ngFor="let acc of assets.currentAsset | slice:1">
+                <td class="indent-4em" *ngIf="acc.finalBalance>0">{{ acc.name }}</td>
+                <td class="text-right" *ngIf="acc.finalBalance>0">{{ acc.finalBalance | currency : ' ' }}</td>
+            </tr>
+            <tr>
+                <th class="indent-4em"><div class="margin-bottom-1em">Total Current Assets</div></th>
+                <th class="text-right"><div class="margin-bottom-1em">{{ assets.currentAsset[0].finalBalance | currency : ' ' }}</div></th>
+            </tr>
+        </tbody>
+        <tbody *ngIf="assets.inventory[0].finalBalance>0">
+            <tr>
+                <th colspan="2" class="indent-2em border-bottom-dark"><div class="margin-top-1em">Inventory</div></th>
+            </tr>
+            <tr *ngFor="let acc of assets.inventory | slice:1">
+                <td class="indent-4em" *ngIf="acc.finalBalance>0">{{ acc.name }}</td>
+                <td class="text-right" *ngIf="acc.finalBalance>0">{{ acc.finalBalance | currency : ' ' }}</td>
+            </tr>
+            <tr>
+                <th class="indent-4em"><div class="margin-bottom-1em">Total Inventory</div></th>
+                <th class="text-right"><div class="margin-bottom-1em">{{ assets.inventory[0].finalBalance | currency : ' ' }}</div></th>
+            </tr>
+        </tbody>
+        <tfoot>
+            <th class="indent-2em"><div class="margin-bottom-1em">Total Assets</div></th>
+            <th class="text-right"><div class="margin-bottom-1em">{{ assets.finalBalance | currency : ' ' }}</div></th>
+        </tfoot>
+    </table>
+    
+    <table *ngIf="liabilities.finalBalance>0">
+        <thead class="border-bottom-dark">
+            <th colspan="2"><h3>Liabilities</h3></th>
+        </thead>
+        <tbody *ngIf="liabilities.currentLiability[0].finalBalance>0">
+            <tr>
+                <th colspan="2" class="indent-2em border-bottom-dark"><div class="margin-top-1em">Current Liabilities</div></th>
+            </tr>
+            <tr *ngFor="let acc of liabilities.currentLiability | slice:1">
+                <td class="indent-4em" *ngIf="acc.finalBalance>0">{{ acc.name }}</td>
+                <td class="text-right" *ngIf="acc.finalBalance>0">{{ acc.finalBalance | currency : ' ' }}</td>
+            </tr>
+            <tr>
+                <th class="indent-4em"><div class="margin-bottom-1em">Total Current Liabilities</div></th>
+                <th class="text-right"><div class="margin-bottom-1em">{{ liabilities.currentLiability[0].finalBalance | currency : ' ' }}</div></th>
+            </tr>
+        </tbody>
+        <tfoot style="border-bottom: none;">
+            <th class="indent-2em"><div class="margin-bottom-1em">Total Liabilities</div></th>
+            <th class="text-right"><div class="margin-bottom-1em">{{ liabilities.finalBalance | currency : ' ' }}</div></th>
+        </tfoot>
+    </table>
+
+    <table>
+        <tbody class="net-assets">
+            <th><h3>Net Assets</h3></th>
+            <th class="text-right">{{ netAssets | currency : ' ' }}</th>
+        </tbody>
+    </table>
+    
+    <table *ngIf="equity.finalBalance>0">
+        <thead>
+            <th colspan="2" class="border-bottom-dark"><h3>Equity</h3></th>
+        </thead>
+        <tbody>
+            <tr *ngIf="currentYearEarnings!=0">
+                <td class="indent-2em">Current Year Earnings</td>
+                <td class="text-right">{{ currentYearEarnings | currency : ' ' }}</td>
+            </tr>
+            <tr>
+                <td class="indent-2em">Retained Earnings</td>
+                <td class="text-right">{{ equity.finalBalance | currency : ' ' }}</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <th class="indent-2em">Total Equity</th>
+            <th class="text-right">{{ equity.finalBalance + currentYearEarnings | currency : ' ' }}</th>
+        </tfoot>
+    </table>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,48 @@
+<mat-button-toggle-group #group="matButtonToggleGroup" value="">
+    <mat-button-toggle (click)="applyFilter('')" value="">All Accounts</mat-button-toggle>
+    <mat-button-toggle (click)="applyFilter('Assets')" value="Assets">Assets</mat-button-toggle>
+    <mat-button-toggle (click)="applyFilter('Liabilities')" value="Liabilities">Liabilities</mat-button-toggle>
+    <mat-button-toggle (click)="applyFilter('Equity')" value="Equity">Equity</mat-button-toggle>
+    <mat-button-toggle (click)="applyFilter('Expenses')" value="Expenses">Expenses</mat-button-toggle>
+    <mat-button-toggle (click)="applyFilter('Revenue')" value="Revenue">Revenue</mat-button-toggle>
+</mat-button-toggle-group>
+<div class="mat-elevation-z8">
+  <table mat-table #table [dataSource]="dataSource" matSort aria-label="Elements">
+    <!-- Code Column -->
+    <ng-container matColumnDef="code">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Code</th>
+      <td mat-cell *matCellDef="let row">{{row.code}}</td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+      <td style="width:65%;" mat-cell *matCellDef="let row">
+        <p style="margin-bottom:0;">{{row.accountName}}</p>
+        <p style="font-size: 75%; color:#868686; margin-top:0;">{{row.description}}</p>
+      </td>
+    </ng-container>
+
+    <!-- Sub Category Column -->
+    <ng-container matColumnDef="subCategory">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Type</th>
+      <td mat-cell *matCellDef="let row">{{row.subCategory}}</td>
+    </ng-container>
+
+    <!-- Sub Category Column -->
+    <ng-container matColumnDef="ytd">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>YTD</th>
+      <td mat-cell *matCellDef="let row">{{calcYTD(row.code)}}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator #paginator
+    [length]="dataSource.length"
+    [pageIndex]="0"
+    [pageSize]="50"
+    [pageSizeOptions]="[25, 50, 100, 250]">
+  </mat-paginator>
+</div>

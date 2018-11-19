@@ -1,0 +1,40 @@
+<mat-card>
+    <mat-card-title>
+        <h1 class="report-h1">General Ledger Summary</h1>
+        <h2 class="report-h2">{{ gb.currentUser.name }}</h2>
+        <h2 class="report-h2">From {{ startDate | date : 'd MMMM yyyy' }} to {{ endDate | date : 'd MMMM yyyy' }}</h2>
+
+        <div class="reporting-period-picker">
+            <h4 class="mat-h4">Reporting Period</h4>
+            <input type="month" [(ngModel)]="reportingPeriod" (ngModelChange)="reportingPeriodHandler()" required>
+        </div>
+    </mat-card-title>
+    <mat-card-content>
+        <table class="text-right">
+            <thead>
+                <tr>
+                    <th class="text-left">Account</th>
+                    <th>Debit</th>
+                    <th>Credit</th>
+                    <th>Net Movement</th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let acc of gb.userLedgerAccounts">
+                <tr *ngIf="calcAccCredits(acc.code)>0 || calcAccDebits(acc.code)>0">
+                    <td class="text-left">{{ acc.accountName }} ({{ acc.code }})</td>
+                    <td>{{ calcAccDebits(acc.code) | currency:' ' }}</td>
+                    <td>{{ calcAccCredits(acc.code) | currency:' ' }}</td>
+                    <td>{{ calcAccNetMovement(acc.code) }}</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th class="text-left">Total</th>
+                    <th>{{ calcNetTotalDebits() | currency:' ' }}</th>
+                    <th>{{ calcNetTotalCredits() | currency:' ' }}</th>
+                    <th>{{ calcTotalNetMovement() }}</th>
+                </tr>
+            </tfoot>
+        </table>
+    </mat-card-content>
+</mat-card>

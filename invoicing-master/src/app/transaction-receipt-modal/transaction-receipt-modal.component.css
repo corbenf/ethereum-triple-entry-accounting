@@ -1,0 +1,35 @@
+.date {
+    margin-top: 0px;
+    text-align: right;
+}
+
+h2 {
+    text-align: right;
+}
+
+table {
+    width: 100%;
+    text-align: left;
+    margin-top: 16px;
+    table-layout: fixed;
+    font-size: 11pt;
+}
+
+table th {
+    width: 20%;
+    text-align: right;
+    padding: 6px 7px;
+}
+
+table td {
+    padding: 6px 7px;
+}
+
+.signature-td {
+    word-wrap: break-word;
+}
+
+#spinner{
+    margin: auto;
+    margin-top: 40px;
+}

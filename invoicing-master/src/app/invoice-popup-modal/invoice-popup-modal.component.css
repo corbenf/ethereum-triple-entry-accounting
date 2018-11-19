@@ -1,0 +1,137 @@
+.mat-dialog-title{
+    text-align: center;
+    text-transform: uppercase;
+    color: #fff;
+    font-size: 22pt;
+    font-weight: normal;
+}
+
+.mat-dialog-content {
+    background: #999999;
+}
+
+.page {
+    background: white;
+    display: grid;
+    grid-template-rows: 4cm 6cm 1fr 2cm;
+    margin: 24px auto;
+    margin-bottom: 0.5cm;
+    box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
+}
+
+.A4 {
+    width: 21cm;
+    height: 29.7cm;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-left {
+    text-align: left;
+}
+
+h6{
+    color: #999999;
+    font-weight: normal;
+    font-size: 11pt;
+    margin: 0;
+}
+
+.invoice-header {
+    height: 4cm;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    padding: 0 20px;
+    color: #fff;
+}
+
+.invoice-header div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.invoice-header h1 {
+    font-weight: normal;
+    font-size: 36pt;
+}
+
+.invoice-billing-section {
+    display: grid;
+    grid-template-columns: 5cm 4.2cm 4.2cm 1fr;
+    grid-gap: 1em;
+    padding: 20px;
+}
+
+.invoice-billing-section div {
+    margin-top: 30px;
+}
+
+.invoice-billing-section p {
+    margin-top: 5px;
+}
+
+#invoice-total {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin-top: 0;
+}
+
+#invoice-total div {
+    margin-top: 0;
+}
+
+#invoice-total h1 {
+    color:lightslategrey;
+    font-weight: normal;
+    margin-top: 10px;
+}
+
+#due-date {
+    font-size: 14pt;
+}
+
+table {
+    width: 95%;
+    margin: auto;
+    padding-top: 2em;
+    font-size: 10pt;
+    border-top: 2px solid lightslategray;
+}
+
+table th {
+    color: lightslategray;
+    font-weight: normal;
+}
+
+table td {
+    font-weight: bold;
+}
+
+tbody td {
+    padding: 1em 0;
+}
+
+tfoot th,
+tfoot td {
+    padding: 0.5em 0;
+}
+
+.invoice-footer {
+    text-align: center;
+    font-size: 8pt;
+}
+
+.footer-card {
+    width: 95%;
+    margin: auto;
+    border-top: 2px solid lightslategray;
+    
+}
+
+.mat-dialog-actions {
+    justify-content: flex-end;
+}

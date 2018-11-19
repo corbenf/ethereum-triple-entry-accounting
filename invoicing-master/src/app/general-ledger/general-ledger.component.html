@@ -1,0 +1,14 @@
+<div class="container" *ngIf="gb.userLedgerAccounts; else loading">
+  <mat-button-toggle-group #group="matButtonToggleGroup" value="Summary">
+    <mat-button-toggle (click)="view='Summary'" value="Summary">Summary</mat-button-toggle>
+    <mat-button-toggle (click)="view='Report'" value="Assets">Report</mat-button-toggle>
+  </mat-button-toggle-group>
+  
+    <!-- Need to research routing these -->
+  <general-ledger-summary *ngIf="view=='Summary'"></general-ledger-summary>
+  <general-ledger-report *ngIf="view=='Report'"></general-ledger-report>
+</div>
+
+<ng-template #loading>
+  <mat-spinner></mat-spinner>
+</ng-template>

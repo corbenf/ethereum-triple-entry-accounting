@@ -1,0 +1,16 @@
+hr {
+    margin-top: 0;
+    margin-bottom: 40px;
+}
+
+.chart-container {
+    display:block;
+    width: 100%;
+}
+
+@media(min-width:1501px){
+    canvas {
+        width: 100%!important;
+        height: 280px!important;
+    }
+}

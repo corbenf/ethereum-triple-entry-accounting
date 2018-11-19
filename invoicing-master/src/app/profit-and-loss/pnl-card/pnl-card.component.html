@@ -1,0 +1,79 @@
+<mat-card>
+  <mat-card-title>
+    <h1 class="report-h1">Profit and Loss</h1>
+    <h2 class="report-h2">{{ gb.currentUser.name }}</h2>
+    <h2 class="report-h2">For the month ending {{ endDate | date : 'dd MMMM yyyy'}} </h2>
+
+    <div class="reporting-period-picker">
+      <h4 class="mat-h4">Reporting Period</h4>
+      <input type="month" [(ngModel)]="reportingPeriod" (ngModelChange)="reportingPeriodHandler()" required>
+    </div>
+    
+  </mat-card-title>
+  <mat-card-content>
+    <table class="text-left">
+      <tbody *ngIf="tradingIncome.accounts.length>0">
+        <tr>
+          <th class="th-h1">
+            <h3 class="add-top-margin">Trading Income</h3>
+          </th>
+          <th class="th-h1 th-reporting-period text-right">{{ endDate | date : 'MMM yyyy'}}</th>
+        </tr>
+        <tr *ngFor="let acc of tradingIncome.accounts">
+          <td class="indent-1">{{ acc.name }}</td>
+          <td class="text-right">{{ acc.total | currency : ' ' }}</td>
+        </tr>
+        <tr class="total-row">
+          <th class="indent-1">Total Trading Income</th>
+          <th class="text-right">{{ tradingIncome.total | currency : ' ' }}</th>
+        </tr>
+      </tbody>
+      <tbody *ngIf="costOfSales.accounts.length>0">
+        <tr>
+          <th class="th-h1" colspan="2">
+            <h3 class="add-top-margin">Cost of Sales</h3>
+          </th>
+        </tr>
+        <tr *ngFor="let acc of costOfSales.accounts">
+          <td class="indent-1">{{ acc.name }}</td>
+          <td class="text-right">{{ acc.total | currency : ' ' }}</td>
+        </tr>
+        <tr class="total-row">
+          <th class="indent-1">Total Cost of Sales</th>
+          <th class="text-right">{{ costOfSales.total | currency : ' ' }}</th>
+        </tr>
+      </tbody>
+      <tbody>
+        <tr class="major-total-row">
+          <th>
+            <h3 class="mat-h3">Gross Profit</h3>
+          </th>
+          <th class="text-right">{{ tradingIncome.total - costOfSales.total | currency : ' ' }}</th>
+        </tr>
+      </tbody>
+      <tbody *ngIf="operatingExpenses.accounts.length>0">
+        <tr>
+          <th class="th-h1" colspan="2">
+            <h3 class="add-top-margin">Operating Expenses</h3>
+          </th>
+        </tr>
+        <tr *ngFor="let acc of operatingExpenses.accounts">
+          <td class="indent-1">{{ acc.name }}</td>
+          <td class="text-right">{{ acc.total | currency : ' ' }}</td>
+        </tr>
+        <tr class="total-row">
+          <th class="indent-1">Total Operating Expenses</th>
+          <th class="text-right">{{ operatingExpenses.total | currency : ' ' }}</th>
+        </tr>
+      </tbody>
+      <tbody>
+        <tr class="major-total-row">
+          <th>
+            <h3 class="mat-h3">Net Profit</h3>
+          </th>
+          <th class="text-right">{{ netProfit | currency : ' ' }}</th>
+        </tr>
+      </tbody>
+    </table>
+  </mat-card-content>
+</mat-card>

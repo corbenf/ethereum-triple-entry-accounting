@@ -1,0 +1,61 @@
+.reporting-period-picker {
+    position: absolute;
+    right: 20px;
+    top: 24px;
+    font-size: 16px;
+}
+
+.mat-h4 {
+    margin-bottom: 5px;
+}
+
+table tbody th,
+table tbody td {
+    border-bottom: 1px solid rgba(0, 0, 0, .04);
+    padding-top: 6px;
+    padding-bottom: 6px;
+    padding-right: 7px;
+}
+
+.th-h1 {
+    border-bottom: 1px solid rgb(153, 153, 153);
+    padding-left: 7px;
+}
+
+.th-reporting-period {
+    width:20%;
+    padding-top: 35px!important;
+    color: rgb(0,0,0);
+    font-weight: 500;
+}
+
+table h3 {
+    margin-bottom: 0;
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.add-top-margin {
+    margin-top: 1.5em;
+}
+
+.indent-1 {
+    padding-left: 2em;
+}
+
+.total-row th {
+    color: rgb(0,0,0);
+    font-weight: 500;
+}
+
+.major-total-row {
+    background-color: #fbfcfc;
+}
+
+.major-total-row th {
+    border-top: 1px solid rgb(153, 153, 153);
+    border-bottom: 1px solid rgb(153, 153, 153);
+    padding: 0 7px;
+    color: rgb(0,0,0);
+    font-weight: 500;
+}

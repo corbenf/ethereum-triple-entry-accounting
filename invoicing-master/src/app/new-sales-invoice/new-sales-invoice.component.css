@@ -1,0 +1,51 @@
+.grid-container {
+    margin: 20px 50px;
+  }
+
+.flex {
+    display: flex;
+    justify-content: space-between;
+}
+
+.flex-end {
+    justify-content: flex-end;
+}
+
+.mat-card .mat-divider-horizontal {
+    left: auto;
+    width: 95%;
+}
+
+.text-right {
+    text-align: right;
+}
+
+#invoice-lines-container {
+    width: 100%;
+}
+
+#add-new-line-btn {
+    margin-right: 19px;
+}
+
+#totals-container td {
+    min-width: 100px;
+}
+
+#totals-container {
+    width: 30%!important;
+}
+
+#submit-invoice-loader {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@media(min-width:1600px){
+    .mat-card {
+        margin: auto;
+        width: 80%;
+    }
+}

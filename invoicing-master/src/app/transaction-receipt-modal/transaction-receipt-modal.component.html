@@ -1,0 +1,58 @@
+<h1 class="report-h1">Transaction Receipt</h1>
+<h6 class="report-h2">{{ data.txHash }}</h6>
+<mat-dialog-content *ngIf="display; else loading">
+  <p class="date">{{ display?.date }}</p>
+  <mat-divider></mat-divider>
+      
+<div style="width:100%;">
+    <table>
+      <tbody>
+        <tr>
+          <th>Invoice Address:</th>
+          <td>{{ display?.contractAddress }}</td>
+        </tr>
+        <tr>
+          <th>From:</th>
+          <td>
+            {{ display?.from }}<br/>
+            ({{ display?.fromAccount }})
+          </td>
+        </tr>
+        <tr>
+          <th>To:</th>
+          <td>
+            {{ display?.to }}<br/>
+            ({{ display?.toAccount }})
+        </tr>
+        <tr>
+            <th>Block Number:</th>
+            <td>{{ display?.blockNumber }}</td>
+          </tr>
+          <tr>
+            <th>Block Timestamp:</th>
+            <td>{{ display?.timestamp }}</td>
+          </tr>
+        <tr>
+          <th>Value:</th>
+          <td>{{ display?.value | currency : ' ' }}</td>
+        </tr>
+        <tr>
+          <th>Type:</th>
+          <td>{{ display?.type }}</td>
+        </tr>
+        <tr *ngIf="display?.signature">
+          <th>Signature:</th>
+          <td class="signature-td">{{ display?.signature }}</td>
+        </tr>
+      </tbody>
+    </table>
+</div>
+  </mat-dialog-content>
+
+<ng-template #loading>
+  <mat-dialog-content style="height: 70%;">
+    <p class="date">Loading...</p>
+    <mat-divider></mat-divider>
+    <mat-spinner id="spinner"></mat-spinner>
+  </mat-dialog-content>
+</ng-template>

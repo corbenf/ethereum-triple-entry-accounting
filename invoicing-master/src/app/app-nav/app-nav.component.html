@@ -1,0 +1,73 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    fixedInViewport="true"
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="!(isHandset$ | async)">
+    <mat-toolbar *ngIf="(isHandset$ | async)" color="primary">Menu</mat-toolbar>
+    <mat-toolbar *ngIf="!(isHandset$ | async)" color="primary">ProtoCounting 0.3a</mat-toolbar>
+    <mat-nav-list>
+      <mat-list-item routerLink='dashboard' routerLinkActive="active">
+        <mat-icon matListIcon>dashboard</mat-icon>
+        <a matLine>Dashboard</a>
+      </mat-list-item>
+      
+      <mat-toolbar color="secondary"><mat-icon matListIcon>account_balance</mat-icon> <span style="padding-left:5px;">Accounts</span> </mat-toolbar>
+      <mat-list-item routerLink='chart-of-accounts' routerLinkActive="active">
+        <mat-icon matListIcon>assignment</mat-icon>
+        <a matLine>Chart of Accounts</a>
+      </mat-list-item>
+      <mat-list-item routerLink='inventory' routerLinkActive="active">
+        <mat-icon matListIcon>widgets</mat-icon>
+        <a matLine>Inventory</a>
+      </mat-list-item>
+
+      <mat-toolbar color="secondary"><mat-icon>receipt</mat-icon> <span style="padding-left:5px;">Invoicing</span> </mat-toolbar>
+      <mat-list-item routerLink='new-invoice' routerLinkActive="active">
+        <mat-icon matListIcon>send</mat-icon>
+        <a matLine>Send New Invoice</a>
+      </mat-list-item>
+      <mat-list-item routerLink='sent-invoices' routerLinkActive="active">
+        <mat-icon matListIcon>call_made</mat-icon>
+        <a matLine>Sent Invoices</a>
+      </mat-list-item>
+      <mat-list-item routerLink='received-invoices' routerLinkActive="active">
+        <mat-icon matListIcon>call_received</mat-icon>
+        <a matLine>Received Invoices</a>
+      </mat-list-item>
+
+      <mat-toolbar color="secondary"><mat-icon>assessment</mat-icon> <span style="padding-left:5px;">Reports</span> </mat-toolbar>
+      
+      <mat-list-item routerLink='balance-sheet' routerLinkActive="active">
+        <mat-icon matListIcon>description</mat-icon>
+        <a matLine>Balance Sheet</a>
+      </mat-list-item>
+      <mat-list-item routerLink='general-ledger' routerLinkActive="active">
+        <mat-icon matListIcon>book</mat-icon>
+        <a matLine>General Ledger</a>
+      </mat-list-item>
+      <mat-list-item routerLink='profit-and-loss' routerLinkActive="active">
+        <mat-icon matListIcon>timeline</mat-icon>
+        <a matLine>Profit and Loss</a>
+      </mat-list-item>
+
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span *ngIf="(isHandset$ | async)">ProtoCounting 0.3a</span>
+    </mat-toolbar>
+    <!-- Add Content Here -->
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

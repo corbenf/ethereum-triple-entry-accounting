@@ -1,0 +1,6 @@
+<div class="container">
+  <app-balance-sheet-card *ngIf="gb.userLedgerAccounts; else loading"></app-balance-sheet-card>
+  <ng-template #loading>
+    <mat-spinner></mat-spinner>
+  </ng-template>
+</div>

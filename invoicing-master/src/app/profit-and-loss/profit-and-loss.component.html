@@ -1,0 +1,6 @@
+<div class="container">
+  <app-pnl-card *ngIf="gb.userLedgerAccounts; else loading"></app-pnl-card>
+  <ng-template #loading>
+    <mat-spinner></mat-spinner>
+  </ng-template>
+</div>

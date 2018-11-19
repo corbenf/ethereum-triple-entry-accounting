@@ -1,0 +1,58 @@
+.reporting-period-picker {
+    position: absolute;
+    right: 20px;
+    top: 24px;
+    font-size: 16px;
+}
+
+.mat-h4 {
+    margin-bottom: 5px;
+}
+
+table {
+    width: 100%;
+    margin: 30px auto;
+    border-collapse: collapse;
+}
+
+table th {    
+    font-weight: 500;
+    color: #000;
+}
+
+table thead th {
+    border-bottom: 2px solid rgba(0, 0, 0, .80);
+    font-weight: 500;
+    color: #000;
+}
+
+table tbody th,
+table tbody td {
+    border-bottom: 1px solid rgba(0, 0, 0, .04);
+    padding: 3px 1px;
+}
+
+.account-header {
+    padding-top: 1.5em!important;
+}
+
+.hash-cell {
+    font-size: 9pt;
+}
+
+.clickable-row:hover {
+    cursor: pointer;
+    background: #f5f5f5;
+}
+
+.total-row {
+    border-bottom-style: double;
+}
+
+.net-movement-row {
+    border-bottom-style: groove;
+}
+
+.grand-total-row th {
+    padding-top: 1.5em;
+}

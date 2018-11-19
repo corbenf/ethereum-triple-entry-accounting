@@ -1,0 +1,37 @@
+.reporting-period-picker {
+    position: absolute;
+    right: 20px;
+    top: 24px;
+    font-size: 16px;
+}
+
+.mat-h4 {
+    margin-bottom: 5px;
+}
+
+table {
+    width: 100%;
+    margin: 30px auto;
+    border-collapse: collapse;
+}
+
+table thead th {
+    border-bottom: 1.5px solid rgba(0, 0, 0, .30);
+    padding: 1px 7px;
+    width: 25%;
+    font-weight: 500;
+    color: #000;
+}
+
+table tbody td {
+    border-bottom: 1px solid rgba(0, 0, 0, .04);
+    padding: 6px 7px;
+}
+
+table tfoot th {
+    border-top-style: double;
+    border-top-color: rgba(0, 0, 0, .30);
+    padding: 6px 7px;
+    font-weight: 500;
+    color: #000;
+}

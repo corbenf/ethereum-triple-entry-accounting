@@ -1,0 +1,36 @@
+<div class="mat-elevation-z8">
+  <table mat-table #table [dataSource]="dataSource" matSort aria-label="Inventory Items">
+    <!-- SKU Column -->
+    <ng-container matColumnDef="sku">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>SKU</th>
+      <td mat-cell *matCellDef="let row">{{row.sku}}</td>
+    </ng-container>
+
+    <!-- Description Column -->
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Description</th>
+      <td mat-cell *matCellDef="let row">{{row.description}}</td>
+    </ng-container>
+
+    <!-- Cost Price Column -->
+    <ng-container matColumnDef="avgCost">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Average Cost</th>
+      <td mat-cell *matCellDef="let row">{{row.totalValue/row.soh | currency : ' '}}</td>
+    </ng-container>
+
+    <!-- Sale Price Column -->
+    <ng-container matColumnDef="salePrice">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Sale Price</th>
+      <td mat-cell *matCellDef="let row">{{row.salePrice | currency : ' '}}</td>
+    </ng-container>
+
+    <!-- SOH Column -->
+    <ng-container matColumnDef="soh">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>SOH</th>
+      <td mat-cell *matCellDef="let row">{{row.soh}}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>

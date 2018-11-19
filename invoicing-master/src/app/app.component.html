@@ -1,0 +1,4 @@
+<app-nav *ngIf="gb.currentUser; else loading"></app-nav>
+<ng-template #loading>
+    <mat-spinner id="loading"></mat-spinner>
+</ng-template>

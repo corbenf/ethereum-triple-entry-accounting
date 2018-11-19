@@ -1,0 +1,142 @@
+<div class="grid-container">
+  <!-- <h1 class="mat-h1">New Sales Invoice</h1> -->
+  <mat-card *ngIf="!formSubmitted" class="new-invoice-container">
+    <form [formGroup]="newSalesInvoiceForm" (ngSubmit)="submitInvoice()">
+        <mat-card-title>New Sales Invoice</mat-card-title>
+
+        <mat-card-content class="flex">
+          <mat-form-field>
+            <mat-select matInput placeholder="To" formControlName="to" required>
+              <mat-option value="">Select...</mat-option>
+              <mat-option *ngFor="let cust of gb.allUsers" [value]="cust.hexAccount">{{cust.name}}</mat-option>
+            </mat-select>
+            <mat-hint></mat-hint>
+            <mat-error>Recipient must be selected</mat-error>
+          </mat-form-field>
+          
+          <mat-form-field>
+            <input matInput placeholder="Issue Date" formControlName="issueDate">
+            <mat-hint></mat-hint>
+            <mat-error></mat-error>
+          </mat-form-field>
+          
+          <mat-form-field>
+            <input matInput [min]="today" [matDatepicker]="dueDatePicker" placeholder="Due Date" formControlName="dueDate">
+            <mat-datepicker-toggle matSuffix [for]="dueDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #dueDatePicker></mat-datepicker>
+            <mat-hint></mat-hint>
+            <mat-error></mat-error>
+          </mat-form-field>
+          
+          <mat-form-field>
+            <input matInput placeholder="Invoice #" formControlName="number">
+            <mat-hint></mat-hint>
+            <mat-error></mat-error>
+          </mat-form-field>
+          
+          <mat-form-field>
+            <input matInput placeholder="Reference" formControlName="reference">
+            <mat-hint></mat-hint>
+            <mat-error></mat-error>
+          </mat-form-field>
+        </mat-card-content>
+
+        <mat-card-content>
+          <h2 class="mat-h2">Line Items</h2>
+          
+          <div formArrayName="lines" *ngFor="let item of newSalesInvoiceForm.get('lines').controls; let i=index">
+            <!-- row divider show for every next row, exclude if first row -->
+            <mat-divider *ngIf="newSalesInvoiceForm.controls.lines.controls.length > 1 && i > 0" ></mat-divider><br>
+          
+            <!-- group name in this case row index -->
+            <table id="invoice-lines-container" [formGroupName]="i">
+              <tbody>
+              <tr>
+                <!-- line item name input field -->
+                <td>
+                  <mat-form-field> 
+                    <mat-select matInput placeholder="Item name" formControlName="sku" (ngModelChange)="updateLineItems($event,i)" required>
+                      <mat-option *ngFor="let item of gb.userInventory; let i = index" [value]="item.sku">{{item.description}}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="item.controls.name.invalid">
+                      Item name is required.        
+                    </mat-error>            
+                  </mat-form-field>
+                </td>
+                
+                <!-- line item unit cost input field -->
+                <td>
+                  <mat-form-field> 
+                    <input class="text-right" matInput placeholder="Unit Price" type="number" formControlName="unitCost">
+                  </mat-form-field>
+                </td>
+                
+                <!-- line item quantity input field -->
+                <td>
+                  <mat-form-field> 
+                    <input class="text-right" matInput [min]="1" placeholder="Quantity" type="number" formControlName="qty">
+                  </mat-form-field>
+                </td>
+                
+                <!-- line item discount input field -->
+                <td>
+                  <mat-form-field> 
+                    <input class="text-right" matInput [min]="0" [max]="100" placeholder="Discount" type="number" formControlName="discount">
+                  </mat-form-field>
+                </td>
+                
+                <!-- line item total price input field, calculated and not editable -->  
+                <td>
+                  <mat-form-field> 
+                        <input class="text-right" matInput placeholder="Amount" formControlName="lineTotal">
+                  </mat-form-field>
+                </td>
+                
+                <!-- row delete button, hidden if there is just one row -->
+                <td class="text-right">
+                  <button type="button" mat-mini-fab color="warn" *ngIf="newSalesInvoiceForm.controls.lines.controls.length > 1" (click)="removeLineItem(i)">
+                    <mat-icon>delete forever</mat-icon>
+                  </button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </mat-card-content>
+
+        <!-- New line item button -->
+        <mat-card-actions class="text-right">
+          <button id="add-new-line-btn" type="button" mat-mini-fab color="primary" (click)="addLineItem()">
+            <mat-icon>add box</mat-icon>
+          </button>
+        </mat-card-actions>
+
+        <!-- Totals -->
+        <mat-card-content class="flex flex-end">
+          <table id="totals-container">
+            <tbody class="text-right">
+              <tr>
+                <td>Subtotal</td>
+                <td>{{subTotal | currency}}</td>
+              </tr>
+              <tr>
+                <td>Includes GST 15.00%</td>
+                <td>{{GST | currency}}</td>
+              </tr>
+              <tr>
+                <td><h2 class="mat-h2">Total</h2></td>
+                <td><h2 class="mat-h2">{{grandTotal | currency}}</h2></td>
+              </tr>
+            </tbody>
+          </table>
+        </mat-card-content>
+
+        <!-- Submit button -->
+        <mat-card-actions class="text-right">
+          <button id="add-new-line-btn" type="submit" color="primary" mat-raised-button [disabled]="newSalesInvoiceForm.invalid">Submit</button>
+        </mat-card-actions>
+    </form>
+  </mat-card>
+
+  <mat-spinner *ngIf="formSubmitted" id="submit-invoice-loader" color="primary" mode="indeterminate"></mat-spinner>
+</div>

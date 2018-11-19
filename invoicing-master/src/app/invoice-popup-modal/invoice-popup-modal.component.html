@@ -1,0 +1,116 @@
+<div *ngIf="invoice; else loading" >
+  <h2 mat-dialog-title [ngStyle]="setHeaderColor()">{{ invoice.state }}</h2>
+  
+  <mat-dialog-content *ngIf="invoice; else loading">
+      <div class='page A4'>
+          <div class="invoice-header" [style.background-color]="invoice.from.invoiceStyleColor">
+              <div id="invoice-type">
+                  <h1>TAX INVOICE</h1>
+              </div>
+              <div id="supplier-contact-details" class="text-right">
+                  <p>
+                    {{ invoice.from.phoneNumber }}<br>
+                    {{ invoice.from.emailAddress }}<br>
+                    {{ invoice.from.webSiteAddress }}<br>
+                  </p>
+              </div>
+              <div id="supplier-address-details" class="text-right">
+                  <p>
+                    {{ invoice.from.name }}<br>
+                    {{ invoice.from.streetAddress[0].street }}<br>
+                    {{ invoice.from.streetAddress[0].suburb }}<br>
+                    {{ invoice.from.streetAddress[0].city }},&#9;{{ invoice.from.streetAddress[0].postCode }}
+                  </p>
+              </div>
+          </div>
+  
+          <div class="invoice-billing-section">
+              <div id="customer-details">
+                  <h6>Billed To</h6>
+                  <p>
+                      {{ invoice.to.name }}<br>
+                      {{ invoice.to.streetAddress[0].street }}<br>
+                      {{ invoice.to.streetAddress[0].suburb }}<br>
+                      {{ invoice.to.streetAddress[0].city }},&#9;{{ invoice.to.streetAddress[0].postCode }}
+                  </p>
+              </div>
+              <div id="invoice-details-1">
+                  <h6>Invoice Number</h6>
+                  <p>INV {{ invoice.number }} </p>
+                  <h6>Date of Issue</h6>
+                  <p>{{ invoice.issueDate | date :  "dd.MM.y" }}</p>          
+              </div>
+              <div id="invoice-details-2">
+                  <h6>Reference/PO</h6>
+                  <p>{{ invoice.reference }}</p>
+                  <h6>GST Number</h6>
+                  <p>{{ invoice.from.gstNumber }}</p>                    
+              </div>
+              <div id="invoice-total" class="text-right">
+                  <div>
+                    <h6>Invoice Total</h6>
+                    <h1>{{ invoice.grandTotal | currency }}</h1>
+                  </div>
+                  <h6 id="due-date" *ngIf="invoice.state!='Paid'">Due by {{ invoice.dueDate | date :  "dd.MM.y" }}</h6>
+              </div>
+          </div>
+  
+          <div class="invoice-line-items">
+            <table>
+              <thead class="text-right">
+                <th class="text-left">Description</th>
+                <th>Unit Price</th>
+                <th>Qty</th>
+                <th>Discount %</th>
+                <th>Amount</th>
+              </thead>
+              <tbody>
+                <tr class="text-right" *ngFor="let item of invoice.lines">
+                  <td class="text-left">{{ item.description }}</td>
+                  <td>{{ item.salePrice | currency }}</td>
+                  <td>{{ item.qty }}</td>
+                  <td>{{ item.discount }}%</td>
+                  <td>{{ item.lineTotal | currency }}</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="5"></td>
+                </tr>
+                <tr class="text-right">
+                  <th colspan="4">Subtotal</th>
+                  <td>{{ invoice.subTotal | currency }}</td>
+                </tr>
+                <tr class="text-right">
+                  <th colspan="4">Total GST {{ gstPercentage }}%</th>
+                  <td>{{ invoice.GST | currency }}</td>
+                </tr>
+                <tr class="text-right">
+                    <th colspan="4">Amount Paid</th>
+                    <td>{{ invoice.amountPaid | currency }}</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+  
+          <div class="invoice-footer">
+            <div class="footer-card" *ngIf="invoice.signature">
+              Signature {{ invoice.signature }}
+            </div>
+          </div>
+        </div>
+  </mat-dialog-content>
+  
+  <mat-dialog-actions *ngIf="invoice.to.hexAccount==gb.currentUser.hexAccount">
+    <div *ngIf="!working">
+      <button *ngIf="invoice.state=='Invoiced' || invoice.state=='Overdue'" mat-flat-button color="primary" (click)="signInvoice()">Sign</button>
+      <button *ngIf="invoice.state=='Signed' || invoice.state=='Overdue (Signed)'" mat-flat-button (click)="payInvoice()" style="background-color: #00a84e">Pay</button>
+    </div>
+    <mat-progress-bar mode="indeterminate" *ngIf="working"></mat-progress-bar>
+  </mat-dialog-actions>
+</div>
+
+
+<mat-dialog-content  *ngIf="!invoice" id="loading">
+  <mat-spinner></mat-spinner>
+</mat-dialog-content>

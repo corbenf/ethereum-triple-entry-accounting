@@ -1,0 +1,32 @@
+<div>
+  <hr/>
+  <div class="subHeader">
+    <div id="payButton">
+      <a mat-stroked-button routerLink="/new-invoice">New sales invoice</a>
+    </div>
+    <div id="stats">
+      <table>
+        <tbody>
+          <tr>
+            <td>{{ outstandingCount }} Awaiting Payment:&emsp;</td>
+            <td>{{ outstandingValue | currency : ' ' }}</td>
+          </tr>
+          <tr id="overdue">
+            <td>{{ overdueCount }} Overdue:&emsp;</td>
+            <td>{{ overdueValue | currency : ' ' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="chart-container">
+    <canvas baseChart
+      [colors]="moneyInColors"
+      [datasets]="moneyInData"
+      [labels]="moneyInLabels"
+      [options]="moneyInOptions"
+      [legend]="moneyInLedged"
+      [chartType]="moneyInType">
+    </canvas>
+  </div>
+</div>
