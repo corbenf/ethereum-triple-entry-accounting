@@ -147,4 +147,4 @@ to start the project. Make sure to confirm the security prompt from MetaMask and
 
 ## License
 
-This project is licensed under the GNU General Public License 3.0 - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the GNU General Public License 3.0 - see the [LICENSE.md](LICENSE) file for details
